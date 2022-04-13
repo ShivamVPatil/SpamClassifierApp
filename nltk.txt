@@ -1,2 +1,0 @@
-stopwwords
-punkt
