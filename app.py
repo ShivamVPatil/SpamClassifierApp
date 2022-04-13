@@ -1,41 +1,37 @@
 import streamlit as st
 import pickle
-import nltk
 import string
 from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
-nltk.download('wordnet')
-nltk.download('stopwords')
-nltk.download('punkt')
+import nltk
+from nltk.stem.wordnet import WordNetLemmatizer
 
-
-lem = WordNetLemmatizer()
+ps = WordNetLemmatizer()
 
 
 def transform_text(text):
     text = text.lower()
     text = nltk.word_tokenize(text)
-    
+
     y = []
     for i in text:
         if i.isalnum():
             y.append(i)
-    
+
     text = y[:]
     y.clear()
-    
+
     for i in text:
-        if i not in stopwords.words('english'):
+        if i not in stopwords.words('english') and i not in string.punctuation:
             y.append(i)
-            
+
     text = y[:]
     y.clear()
-    
+
     for i in text:
-        y.append(lem.lemmatize(i))
-    
-            
+        y.append(ps.lemmatize(i))
+
     return " ".join(y)
+
 tfidf = pickle.load(open('vectorizer.pkl','rb'))
 model = pickle.load(open('model.pkl','rb'))
 
