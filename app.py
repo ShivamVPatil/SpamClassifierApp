@@ -1,9 +1,11 @@
+import nltk
 import streamlit as st
 import pickle
 import string
-import nltk
-from nltk.stem.wordnet import WordNetLemmatizer
 
+
+from nltk.stem.wordnet import WordNetLemmatizer
+from nltk.corpus import stopwords
 ps = WordNetLemmatizer()
 
 
